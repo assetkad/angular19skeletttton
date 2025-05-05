@@ -29,6 +29,71 @@
     ],
     "injectables": [
         {
+            "name": "DataHttpService",
+            "id": "injectable-DataHttpService-7eba0e33583705f67654e350f0290fc815571593cd4321d7e7dd46794cdc9ae9975e742e93af5f8ab7ea9ff5d548787a81a9a463c5273ddf402a31edfddb6a74",
+            "file": "src/app/data-http.service.ts",
+            "properties": [
+                {
+                    "name": "http",
+                    "defaultValue": "inject(HttpClient)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "methods": [
+                {
+                    "name": "getData",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<>",
+                    "typeParameters": [],
+                    "line": 13,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "postData",
+                    "args": [
+                        {
+                            "name": "payload",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<>",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "payload",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable, inject } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable } from 'rxjs';\n\nconst API_URL = 'https://api.example.com/data';\n\n@Injectable({\n  providedIn: 'root',\n})\nexport class DataHttpService {\n  http = inject(HttpClient);\n\n  getData(): Observable<unknown> {\n    return this.http.get<unknown>(API_URL);\n  }\n\n  postData(payload: unknown): Observable<unknown> {\n    return this.http.post<unknown>(API_URL, payload);\n  }\n}\n",
+            "extends": [],
+            "type": "injectable"
+        },
+        {
             "name": "MathService",
             "id": "injectable-MathService-50dde2a637b475a3107c28e25d18183133061e4cf3c5b99b883d0daf5a3697c075b406bc6d08c3efb106bd1e3c5f3d21eb3acf4cc8d11faac5832d2f03a79e04",
             "file": "src/app/math.service.ts",
@@ -132,9 +197,110 @@
     ],
     "guards": [],
     "interceptors": [],
-    "classes": [],
+    "classes": [
+        {
+            "name": "MySuperService",
+            "id": "class-MySuperService-fd072f3a827c7df721ad15787895b5051fa979dddd6b62338d5228d0fb48358710e6d09ade1e6ae37adabcdd2d8a6657285e0ad18131390019f4ae947694aa43",
+            "file": "src/app/another/my-super.service.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "export class MySuperService {\n  getMessage(): string {\n    return 'Real message';\n  }\n}\n",
+            "inputsClass": [],
+            "outputsClass": [],
+            "properties": [],
+            "methods": [
+                {
+                    "name": "getMessage",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 2,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "indexSignatures": [],
+            "extends": [],
+            "hostBindings": [],
+            "hostListeners": []
+        }
+    ],
     "directives": [],
     "components": [
+        {
+            "name": "AnotherComponent",
+            "id": "component-AnotherComponent-e6c6e7dc95013568b65632b7bcee9ed0dd360248c028ffb40886a3a87e697b8c0802862bf3ad1e5f2a71f56adf8d75e22052b91634a3b94470899808d99e9c26",
+            "file": "src/app/another/another.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-another",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./another.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "message",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "mySuperService",
+                    "defaultValue": "inject(MySuperService)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "showMessage",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, inject } from '@angular/core';\nimport { MySuperService } from './my-super.service';\n\n@Component({\n  selector: 'app-another',\n  standalone: true,\n  imports: [],\n  templateUrl: './another.component.html',\n  styleUrl: './another.component.css',\n})\nexport class AnotherComponent {\n  mySuperService = inject(MySuperService);\n  message = '';\n  showMessage() {\n    this.message = this.mySuperService.getMessage();\n  }\n}\n",
+            "styleUrl": "./another.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p class=\"message\">My message: {{message}}<p>"
+        },
         {
             "name": "AppComponent",
             "id": "component-AppComponent-0dcb1974d0a8db1f1e6babfa703a972bc5529aadc8cbadd97b527961b316dff7744ee59d4c91763486f042f63280ee07f70ea126caeb3fab8889ab109349cc8f",
@@ -436,6 +602,74 @@
             "extends": []
         },
         {
+            "name": "IoComponent",
+            "id": "component-IoComponent-74b63b0d615f0b23e840de03212f0a2f88f0fc3c3f5b731640dfc925661bd70fd27541a6f27ff5d57abcf2aaf5c058cba2b7b0e6e1c6271fbaf175f0f308fd1e",
+            "file": "src/app/io/io.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-io",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./io.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "color",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "colorChange",
+                    "defaultValue": "new EventEmitter<string>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "changeColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\n@Component({\n  selector: 'app-io',\n  standalone: true,\n  imports: [],\n  templateUrl: './io.component.html',\n  styleUrl: './io.component.css',\n})\nexport class IoComponent {\n  @Input() color = '';\n  @Output() colorChange = new EventEmitter<string>();\n\n  changeColor() {\n    this.colorChange.emit('pink');\n  }\n}\n",
+            "styleUrl": "./io.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<button (click)=\"changeColor()\"></button>\n<p>My favourite color is: {{color}}</p>"
+        },
+        {
             "name": "MyButtonComponent",
             "id": "component-MyButtonComponent-9ba33bb3ce859f5f6baacf67c5c7e0735530847d6868468d7d395d26ce47c272463a51514399dfb2b1072af1bb6aa650f0cd9780f596ccb49b46ebda9ff6aa04",
             "file": "src/app/my-button/my-button.component.ts",
@@ -624,11 +858,167 @@
             ],
             "stylesData": "",
             "extends": []
+        },
+        {
+            "name": "ParentComponent",
+            "id": "component-ParentComponent-a2543d8fc1853f97b1cdcc2eaee5e646c25c96ecdb78ae339f3bdb78ab63e67d18640ee47c4dc701d6c7d1fe3457e84cd82cad2e34d377ab0d8d26b85bee22ab",
+            "file": "src/app/parent/parent.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-parent",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./parent.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "parentValue",
+                    "defaultValue": "'Parent Value'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-parent',\n  standalone: true,\n  imports: [],\n  templateUrl: './parent.component.html',\n  styleUrl: './parent.component.css',\n})\nexport class ParentComponent {\n  parentValue = 'Parent Value';\n}\n",
+            "styleUrl": "./parent.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div>\n  <h1>Parent Component</h1>\n  <app-child [value]=\"parentValue\"></app-child>\n</div>"
+        },
+        {
+            "name": "SimpleComponent",
+            "id": "component-SimpleComponent-518d41b64b970d40827667209d6c8b808fa359e8d7f0f1c7899a2d585cb1213f3b3e456e0a9efdc15e9638255820e1b8c4f4f1331660a2de530c26ea0c69bd03",
+            "file": "src/app/simple/simple.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-simple",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./simple.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "color",
+                    "defaultValue": "'blue'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "isMessage",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "message",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getNewMessage",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 16,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "showMessage",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-simple',\n  imports: [],\n  templateUrl: './simple.component.html',\n  styleUrl: './simple.component.css',\n})\nexport class SimpleComponent {\n  isMessage = false;\n  color = 'blue';\n  message = '';\n\n  /* We don't test private functions directly only the result when\n they're called by a public function */\n  private getNewMessage() {\n    return 'I am the new message';\n  }\n\n  showMessage() {\n    this.message = this.getNewMessage();\n    this.isMessage = true;\n    this.color = 'red';\n  }\n}\n",
+            "styleUrl": "./simple.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<button (click)=\"showMessage()\">\n  Show message\n</button>\n@if (message) {\n  <p>{{ message }}</p>\n}"
         }
     ],
     "modules": [],
     "miscellaneous": {
         "variables": [
+            {
+                "name": "API_URL",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/data-http.service.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'https://api.example.com/data'"
+            },
             {
                 "name": "appConfig",
                 "ctype": "miscellaneous",
@@ -689,6 +1079,18 @@
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
+            "src/app/data-http.service.ts": [
+                {
+                    "name": "API_URL",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/data-http.service.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'https://api.example.com/data'"
+                }
+            ],
             "src/app/app.config.ts": [
                 {
                     "name": "appConfig",
@@ -755,9 +1157,27 @@
     },
     "routes": [],
     "coverage": {
-        "count": 9,
+        "count": 5,
         "status": "low",
         "files": [
+            {
+                "filePath": "src/app/another/another.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AnotherComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/another/my-super.service.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "MySuperService",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
             {
                 "filePath": "src/app/app.component.ts",
                 "type": "component",
@@ -788,6 +1208,34 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/data-http.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "DataHttpService",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/data-http.service.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "API_URL",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/io/io.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IoComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/math.service.ts",
                 "type": "injectable",
                 "linktype": "injectable",
@@ -801,6 +1249,24 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "MyButtonComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/parent/parent.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ParentComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/simple/simple.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SimpleComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/6",
                 "status": "low"
