@@ -1,36 +1,34 @@
 import { TestBed } from '@angular/core/testing';
 import { DataHttpService } from './data-http.service';
-import { HttpClient } from '@angular/common/http';
-import { of, throwError } from 'rxjs';
+import { provideHttpClient } from '@angular/common/http';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
 
 describe('DataHttpService', () => {
   let service: DataHttpService;
-  let mockHttpClient: jest.Mocked<HttpClient>;
+  let httpTestingController: HttpTestingController;
+
   const API_URL = 'https://api.example.com/data';
   const mockData = { id: 1, name: 'Test Data' };
   const mockError = { status: 404, statusText: 'Not Found' };
 
   beforeEach(() => {
-    mockHttpClient = {
-      get: jest.fn(),
-      post: jest.fn(),
-      request: jest.fn(),
-      delete: jest.fn(),
-      head: jest.fn(),
-      jsonp: jest.fn(),
-      options: jest.fn(),
-      patch: jest.fn(),
-      put: jest.fn(),
-    } as unknown as jest.Mocked<HttpClient>;
-
     TestBed.configureTestingModule({
       providers: [
         DataHttpService,
-        { provide: HttpClient, useValue: mockHttpClient },
+        provideHttpClient(),
+        provideHttpClientTesting(),
       ],
     });
 
     service = TestBed.inject(DataHttpService);
+    httpTestingController = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
   });
 
   it('should be created', () => {
@@ -39,49 +37,51 @@ describe('DataHttpService', () => {
 
   describe('.getData', () => {
     it('should return data from the mocked GET request', () => {
-      mockHttpClient.get.mockReturnValue(of(mockData));
-
       service.getData().subscribe((data) => {
-        console.log('Data:', data);
         expect(data).toEqual(mockData);
       });
 
-      expect(mockHttpClient.get).toHaveBeenCalledWith(API_URL);
+      const req = httpTestingController.expectOne(API_URL);
+      expect(req.request.method).toEqual('GET');
+      req.flush(mockData);
     });
 
     it('should handle GET errors from the mocked request', () => {
-      mockHttpClient.get.mockReturnValue(throwError(() => mockError));
-
       service.getData().subscribe({
         next: () => {
           console.log('This should not be called');
           fail('Should have failed');
         },
         error: (error) => {
-          console.log('Error:', error);
           expect(error.status).toEqual(mockError.status);
         },
       });
 
-      expect(mockHttpClient.get).toHaveBeenCalledWith(API_URL);
+      const req = httpTestingController.expectOne(API_URL);
+      expect(req.request.method).toEqual('GET');
+      req.flush(null, {
+        status: mockError.status,
+        statusText: mockError.statusText,
+      });
     });
   });
 
   describe('.postData', () => {
     it('should make POST request with payload', () => {
       const testPayload = { data: 'test' };
-      mockHttpClient.post.mockReturnValue(of(mockData));
 
       service.postData(testPayload).subscribe((data) => {
         expect(data).toEqual(mockData);
       });
 
-      expect(mockHttpClient.post).toHaveBeenCalledWith(API_URL, testPayload);
+      const req = httpTestingController.expectOne(API_URL);
+      expect(req.request.method).toBe('POST');
+      expect(req.request.body).toEqual(testPayload);
+      req.flush(mockData);
     });
 
     it('should handle POST errors from the mocked request', () => {
       const testPayload = { data: 'test' };
-      mockHttpClient.post.mockReturnValue(throwError(() => mockError));
 
       service.postData(testPayload).subscribe({
         next: () => fail('Should have failed'),
@@ -90,7 +90,13 @@ describe('DataHttpService', () => {
         },
       });
 
-      expect(mockHttpClient.post).toHaveBeenCalledWith(API_URL, testPayload);
+      const req = httpTestingController.expectOne(API_URL);
+      expect(req.request.method).toEqual('POST');
+      expect(req.request.body).toEqual(testPayload);
+      req.flush(null, {
+        status: mockError.status,
+        statusText: mockError.statusText,
+      });
     });
   });
 });
